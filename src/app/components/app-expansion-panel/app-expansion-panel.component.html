@@ -1,0 +1,26 @@
+<div class="app-expansion-panel">
+  <button
+    class="app-expansion-panel__header"
+    (click)="toggle()">
+    <span class="app-expansion-panel__header__title">
+      {{headerTitle | uppercase }}
+    </span>
+    <mat-icon
+      class="app-expansion-panel__header__icon"
+      [ngClass]="{'app-expansion-panel__header__icon--rotated': expanded}"
+      >keyboard_arrow_down</mat-icon>
+  </button>
+  <ul
+    class="app-expansion-panel__body"
+    [class.expanded]="expandedChange | async" [@bodyExpansion]="getExpandedState()">
+    <li *ngFor="let panelItem of config" class="app-expansion-panel__body__item">
+      <mat-form-field>
+        <mat-label>{{panelItem.title}}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let option of panelItem.options" value = option[0]>{{option[1]}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </li>
+  </ul>
+  <mat-divider></mat-divider>
+</div>

@@ -1,0 +1,133 @@
+<div class="app-room" fxLayout = "column" fxLayoutAlign="start stretch" fxFlexFill>
+  <div class="app-room__toolbar" fxFlex ="1 0 3rem" fxFlexFill>
+    <app-room-toolbar
+      [toolbarConfig]="toolbarConfig">
+    </app-room-toolbar>
+  </div>
+  <div class="app-room__view"  fxFlex ="1 0 calc(100% - 3rem)" fxFlexFill>
+    <div
+      class="app-room__view__container"
+      [ngClass] = "{'app-room__view__container--full-width': fullWidthContainer}"
+      (transitionend)="onTransitionEnd($event)"
+      fxFlex.lt-lg ="100%"
+      fxFlex.gt-md ="80%"
+      fxFlex.gt-lg ="1600px">
+      <as-split
+        unit="percent"
+        direction="horizontal"
+        gutterSize = "7"
+        (dragEnd)="onSettingsDragEnd($event)"
+        [useTransition]="true"
+        (transitionEnd)="onTransitionEnd($event)">
+        <as-split-area [size]="sizeChartArea">
+            <as-split
+              unit="percent"
+              direction="vertical"
+              gutterSize = "7"
+              (dragEnd)="onInspectorDragEnd($event)"
+              [useTransition]="true">
+                <as-split-area [size]="sizeNavigator">
+
+                    <div #navigatorWrapper class="app-room__view__navigator-wrapper">
+
+                      <app-timeline-selection-chart
+                        class="chart-container"
+                        [view]="[chartNavConfig.width, chartNavConfig.height]"
+                        [results]="navChartsData"
+                        [scheme]="chartNavConfig.colorScheme"
+                        animations="true"
+                        [xAxis]="chartNavConfig.showXAxis"
+                        [yAxis]="chartNavConfig.showYAxis"
+                        [autoScale]="chartNavConfig.autoscale"
+                        [curve]="chartNavConfig.curve"
+                        (onFilter)="onFilter($event)">
+                      </app-timeline-selection-chart>
+
+                      <app-timeline-selection-chart
+                        class="chart-container"
+                        [view]="[chartNavConfig.width, chartNavConfig.height]"
+                        [results]="navChartsData"
+                        [scheme]="chartNavConfig.colorScheme"
+                        animations="true"
+                        [xAxis]="chartNavConfig.showXAxis"
+                        [yAxis]="chartNavConfig.showYAxis"
+                        [autoScale]="chartNavConfig.autoscale"
+                        [curve]="chartNavConfig.curve"
+                        (onFilter)="onFilter($event)">
+                      </app-timeline-selection-chart>
+
+                      <!--<app-timeline-selection-chart
+                        class="chart-container"
+                        [view]="[chartNavConfig.width, chartNavConfig.height]"
+                        [results]="navChartsData"
+                        [scheme]="chartNavConfig.colorScheme"
+                        animations="true"
+                        [xAxis]="chartNavConfig.showXAxis"
+                        [yAxis]="chartNavConfig.showYAxis"
+                        [autoScale]="chartNavConfig.autoscale"
+                        [curve]="chartNavConfig.curve"
+                        (onFilter)="onFilter($event)">
+                      </app-timeline-selection-chart> -->
+
+                      <!-- <app-waveform-chart
+                        [dataSeries]="navChartsData"
+                        [chartConfig]="chartNavConfig"
+                      ></app-waveform-chart> -->
+                      <!-- <app-waveform-chart
+                        [dataSeries]="navChartsData"
+                        [chartConfig]="chartNavConfig"
+                      ></app-waveform-chart> -->
+
+                    </div>
+
+                </as-split-area>
+                <as-split-area
+                  [size]="sizeInspector">
+
+                  <app-room-toolbar
+                    [toolbarConfig]="inspectorViewBarConfig"
+                    (toolbarEvent)="onInspectorToolbarEvent($event)">
+                  </app-room-toolbar>
+
+                  <div id="download-chart" style = "display: none;">
+                    <img #chartcanvas>
+                    <a #downloadLink></a>
+                  </div>
+
+                  <div #inspectorWrapper #chartscreen class="app-room__view__inspector-wrapper">
+                    <ngx-charts-line-chart
+                      [view]="[insChartWidth, insChartHeight]"
+                      [scheme]="insChartConfig.colorScheme"
+                      [results]="insData"
+                      [curve]="insChartConfig.curve"
+                      [autoScale]="insChartConfig.autoscale"
+                      [timeline]="insChartConfig.timeline"
+                      [tooltipDisabled]="'false'"
+                      [xAxis]="insChartConfig.showXAxis"
+                      [yAxis]="insChartConfig.showYAxis">
+                    </ngx-charts-line-chart>
+                  </div>
+
+                </as-split-area>
+            </as-split>
+        </as-split-area>
+        <as-split-area
+          [size]="sizeSettings"
+          [maxSize]="60">
+
+            <app-expansion-panel
+              [headerTitle]="'navigator settings'"
+              [config]= "navSettingsConfig">
+            </app-expansion-panel>
+
+            <app-expansion-panel
+              [headerTitle]="'inspector settings'"
+              [config]= "insSettingsConfig">
+            </app-expansion-panel>
+
+        </as-split-area>
+      </as-split>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,22 @@
+app-room-toolbar {
+  .app-room-toolbar {
+    height: 3rem;
+    font-size: 1rem;
+    font-weight: 400;
+    border-bottom: 1px solid #bdbdbd;
+    &__spacer {
+      flex: 0 1 100%;
+    }
+    &__group {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    &__item {
+      margin-right: 0.5rem;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

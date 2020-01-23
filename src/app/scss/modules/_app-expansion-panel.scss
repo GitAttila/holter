@@ -1,0 +1,49 @@
+app-expansion-panel {
+  .app-expansion-panel {
+    &__header {
+      display: flex!important;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      border: none;
+      background-color: transparent;
+      font-weight: bolder;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      line-height: 1rem;
+      cursor: pointer;
+      text-align: left;
+      outline: 0;
+      &:focus {
+        background-color: rgba(0,0,0,0.12);
+      }
+      &__title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &__icon {
+        transition: 0.225s transform ease-in-out;
+        &--rotated {
+          transform: rotate(180deg);
+        }
+      }
+    }
+    &__body {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      overflow: hidden;
+      padding: 0 1rem;
+      &.expanded {
+        margin-bottom: 1rem;
+      }
+      &__item {
+        width: 100%;
+        mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

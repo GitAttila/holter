@@ -1,0 +1,35 @@
+<mat-toolbar class="app-room-toolbar">
+  <div class="app-room-toolbar__spacer"></div>
+  <div class="app-room-toolbar__group">
+    <div
+      *ngFor="let menuItem of toolbarConfig"
+      class="app-room-toolbar__item">
+      <mat-slide-toggle
+        *ngIf = "menuItem.type==='slide-toggle'"
+        (change) = "onSliderChange($event)"
+        [name] = "menuItem.name"
+        [color] = "menuItem.color"
+        [checked] = "menuItem.value"
+        [disabled] = "menuItem.disabled">{{menuItem.label}}
+      </mat-slide-toggle>
+      <button
+        *ngIf = "menuItem.type==='button'"
+        mat-stroked-button
+        (click) = "onBtnClicked(menuItem.name)"
+        [name] = "menuItem.name"
+        [color] = "menuItem.color ==='primary' ? 'primary' : 'accent'"
+        [disabled] = "menuItem.disabled">{{menuItem.label | uppercase }}
+      </button>
+      <button
+        *ngIf = "menuItem.type==='icon-button'"
+        mat-icon-button
+        (click) = "onBtnClicked(menuItem.name)"
+        [name] = "menuItem.name"
+        [color] = "menuItem.color ==='primary' ? 'primary' : 'accent'"
+        [disabled] = "menuItem.disabled">
+        <mat-icon>{{menuItem.label}}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</mat-toolbar>
